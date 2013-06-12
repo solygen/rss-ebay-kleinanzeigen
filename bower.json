@@ -1,0 +1,15 @@
+{
+    "name": "RssEbayKleinanzeigen.js",
+    "version": "0.0.1",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "components"
+    ],
+    "dependencies": {
+            "jquery": "~1.9",
+            "bootstrap": "~2.3",
+            "font-awesome": "~3.1",
+            "underscore": "~1.4"
+        }
+}
