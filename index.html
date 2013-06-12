@@ -10,19 +10,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="src/rss-ebay-kleinanzeigen.css">
         <link rel="stylesheet" href="lib/vendors/bootstrap.css">
         <link rel="stylesheet" href="lib/vendors/bootstrap-responsive.css">
         <link rel="stylesheet" href="lib/vendors/font-awesome.min.css">
+        <link rel="stylesheet" href="src/rss-ebay-kleinanzeigen.css">
 
-        <style>
-            body {
-            }
-            div#content {
-                width: 95%;
-                min-height: 100%;
-            }
-        </style>
         <link rel="shortcut icon" href="img/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
@@ -31,21 +23,33 @@
     </head>
     <body>
 
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-        <h2>ebay Kleinanzeigen</h2>
-
-
-        <!-- <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="#"><i class="icon-shopping-cart"></i> ebay Kleinanzeigen</a>
+                <ul class="nav">
+                  <li><a href="#data=refresh"><i class="icon-refresh"></i> Refresh</a></li>
+                  <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
+                  <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span>?</span></a></li>
+                  <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span>?</span></a></li>
+                </ul>
+              <div class="nav-collapse collapse">
+                 <form class="navbar-form pull-right">
+                  <input class="span5" type="text" id="url" placeholder="url">
+                  <div class="btn btn-small" style="margin: 3px"><a href="#url=set"><i class="icon-cog icon-large"></i></a></div>
+                </form>
+              </div><!--/.nav-collapse -->
+            </div>
           </div>
-        </div> -->
+        </div>
+
+
+        <div id='content'></div>
 
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="lib/vendors/jquery.min.js"></script>

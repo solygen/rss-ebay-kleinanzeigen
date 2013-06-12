@@ -1,6 +1,25 @@
+
+body {
+   padding-left: 8px;
+}
+
+div#content {
+    padding-top: 50px;
+}
+
+.media {
+   margin-top: 0px;
+   margin-bottom: 15px;
+}
+
 .image {
    position: relative;
-   width: 100%; /* for IE 6 */
+   background-size: cover;
+   width: 192px;
+   height: 192px;
+   background-position: center center;
+   border: 1px solid black;
+
 }
 
 h3 {
