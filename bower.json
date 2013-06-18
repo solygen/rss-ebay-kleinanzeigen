@@ -10,6 +10,7 @@
             "jquery": "~1.9",
             "bootstrap": "~2.3",
             "font-awesome": "~3.1",
-            "underscore": "~1.4"
+            "underscore": "~1.4",
+            "requirejs": "~2.1"
         }
 }

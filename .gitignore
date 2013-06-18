@@ -2,3 +2,4 @@ components/*
 lib/3rdparty*
 *.sublime*
 builds/website
+vendors

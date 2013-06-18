@@ -56,6 +56,12 @@ module.exports = {
                 cwd: 'vendors/underscore/',
                 src: ['underscore-min.js'],
                 dest: 'lib/vendors/'
+                },
+                {
+                expand: true,
+                cwd: 'vendors/requirejs/',
+                src: ['require.js'],
+                dest: 'lib/vendors/'
                 }
         ]
     },
