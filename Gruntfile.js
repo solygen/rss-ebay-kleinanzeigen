@@ -34,8 +34,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build:libs', ['copy:update'/*, 'clean'*/]);
 
     // is called without any further parameter.
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'copy']);
-    grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('default', ['concat:build']);
+    grunt.registerTask('build', ['jshint', 'concat:min', 'uglify', 'copy']);
 
     //create build for website
     grunt.registerTask('build:website', ['copy:website', 'htmlmin']);
