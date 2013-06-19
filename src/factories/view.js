@@ -1,9 +1,9 @@
 define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
        ['de.solygen/rss-ebay-kleinanzeigen/config'], function (config) {
 
-    return function (crawler) {
+    'use strict';
 
-        'use strict';
+    return function (crawler) {
 
         var self = {},
             list = [];
@@ -35,8 +35,6 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
                         filtered.default = filtered.default + 1 || 1;
                         item.class = 'default';
                     }
-
-
                 }
                 list.push(item);
             });

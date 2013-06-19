@@ -2,9 +2,9 @@
 define('de.solygen/rss-ebay-kleinanzeigen/factories/api',
         function () {
 
-    return function (url, min, max) {
+    'use strict';
 
-        'use strict';
+    return function (url, min, max) {
 
         //vars
         var self = {},

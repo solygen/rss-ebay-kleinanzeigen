@@ -24,32 +24,35 @@
     <body>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="navbar-inner">
-            <div class="container">
-              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="brand" href="#"><i class="icon-shopping-cart"></i> ebay Kleinanzeigen</a>
-                <ul class="nav">
-                  <li><a href="#data=refresh"><i class="icon-refresh"></i> Refresh</a></li>
-                  <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
-                  <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span>?</span></a></li>
-                  <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span>?</span></a></li>
-                </ul>
-              <div class="nav-collapse collapse">
-                 <form class="navbar-form pull-right">
-                  <input class="span5" type="text" id="url" placeholder="url">
-                  <div class="btn btn-small" style="margin: 3px"><a href="#url=set"><i class="icon-cog icon-large"></i></a></div>
-                </form>
-              </div><!--/.nav-collapse -->
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- show collapsed content -->
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- main -->
+                    <a class="brand" href="#"><i class="icon-shopping-cart"></i> ebay Kleinanzeigen</a>
+                    <ul class="nav">
+                        <li><a href="#data=refresh"><i class="icon-refresh"></i> Refresh</a></li>
+                        <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
+                        <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span></span></a></li>
+                        <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span></span></a></li>
+                    </ul>
+                    <!-- collapseble -->
+                    <div class="nav-collapse collapse">
+                         <form class="navbar-form pull-right">
+                            <input class="span5" type="text" id="url" placeholder="url">
+                            <div class="btn btn-small" style="margin: 3px"><a href="#url=set"><i class="icon-cog icon-large"></i></a></div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-          </div>
         </div>
 
-
-        <div id='content'></div>
+        <div id='content'><!-- content is rendered here --></div>
 
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="lib/vendors/jquery.min.js"></script>

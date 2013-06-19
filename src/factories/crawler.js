@@ -1,10 +1,12 @@
 define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
        ['de.solygen/rss-ebay-kleinanzeigen/factories/api',
-        'de.solygen/rss-ebay-kleinanzeigen/config'], function (apiFactory, config) {
+        'de.solygen/rss-ebay-kleinanzeigen/cache',
+        'de.solygen/rss-ebay-kleinanzeigen/config'], function (apiFactory, cache, config) {
+
+    'use strict';
 
     return function (min, max, step) {
 
-        'use strict';
 
         var self = {},
             pmin,
@@ -60,15 +62,13 @@ define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
             pmin = min || 0;
             pmax = max || 60;
             pstep = pstep || 1;
-            data = JSON.parse(localStorage.getItem('data') || JSON.stringify([]));
+            data = cache.get('data') || [];
 
 
             self.empty = function () {
                 data = [];
-                localStorage.setItem('data', JSON.stringify([]));
-                localStorage.removeItem('data');
-                //localStorage.setItem('ignored', JSON.stringify({}));
-                //localStorage.removeItem('ignored');
+                cache.set('data', []);
+                cache.remove('data');
             };
 
             self.reset = function () {
@@ -84,14 +84,14 @@ define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
             }
 
             self.storeData = function () {
-                localStorage.setItem('data', JSON.stringify(data));
-                localStorage.setItem('ignored', JSON.stringify(ignored));
+                cache.set('data', data);
+                cache.set('ignored', ignored);
             }
 
             self.restoreData = function () {
                 //remove duplicates with hash
-                data = JSON.parse(localStorage.getItem('data') || JSON.stringify([]));
-                ignored = JSON.parse(localStorage.getItem('ignored') || JSON.stringify({}));
+                data = cache.get('data') || [];
+                ignored = cache.get('ignored') || {};
             }
 
             self.ignore = function (id) {
