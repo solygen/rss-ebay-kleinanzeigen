@@ -71,7 +71,6 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
             });
             counts = $.extend({false: [], true: []}, counts);
             $(document.body).find('#displayed').removeClass('hidden').find('span').text(counts.false.length + ' of ' + (counts.true.length + counts.false.length));
-            $(document.body).find('#filter').removeClass('hidden').find('span').text(counts.false.length + ' of ' + (counts.true.length + counts.false.length));
 
 
             //sort
@@ -89,21 +88,19 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
                     node.find('a').attr('href', item.link);
                     //node.find('.image').css('background-image', item.image);
                     node.find('.image').css('backgroundImage', 'url("' + item.image + '")');
-
-                    node.find('span').text(item.price);
-                    node.find('h4').text(counter + ' | ' + item.title);
-                    var del = $('<div>XXXXX</div>')
+                    var del = $('<i class="icon-remove icon-large" style="position:relative; bottom:0;right:right:0; z-index:2"></i>')
                                 .click( function (e) {
                                     crawler.ignore(item.id);
-                                    $(this).parent().parent().hide().data('class', 'ignored');
-
+                                    node.hide().data('class', 'ignored');
                                     e.stopPropagation();
                                 });
+
+                    node.find('span').text(item.price);
+                    node.find('h4').append(del).append(' | ' + item.title);
                     node.find('.media-body')
                         .append(item.text)
                         .append('<br>')
-                        .append(item.city)
-                        .append(del);
+                        .append(item.city);
                     node.attr('id', item.id)
                     content.append(node);
                 if (item.hidden) {
