@@ -16,27 +16,35 @@ define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
             ignored;
 
         var getChunk = function (span) {
-                var api = apiFactory(config.url, span.min, span.max);
-                return api.load().then(function (parsed) {
-                        return parsed;
-                    },
-                    function (parsed) {
-                        console.error('ERROR 01')
-                        return parsed;
-                    }
-                );
+                var api,
+                    defs = _.map([].concat(config.getUrl()), function (url) {
+                        api = apiFactory(url, span.min, span.max);
+                        return api.load().then(function (parsed) {
+                                return parsed;
+                            },
+                            function (parsed) {
+                                console.error('ERROR 01')
+                                return parsed;
+                            }
+                        );
+                    });
+                return $.when.apply(null, defs);
             },
+
             next = function () {
                 var max = pmin + pstep;
                 pmin = max;
                 return max <= pmax ? {min: pmin, max: max } : false;
             },
+
             crawl = function () {
                 var defs = [], span;
                 //add def for each called price span
                 while (span = next()) {
                     defs.push(getChunk(span));
                 }
+                //reset span
+                self.resetSpan();
                 //when all finished set data
                 return $.when.apply(null, defs).then(function () {
                     var hash = {}, tmp = [];
@@ -59,8 +67,8 @@ define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
         //init
         var init = function (min, max, step) {
             // set vars
-            pmin = min || 0;
-            pmax = max || 60;
+            pmin = min = min || 0;
+            pmax = max = max || 60;
             pstep = pstep || 1;
             data = cache.get('data') || [];
 
@@ -72,10 +80,14 @@ define( 'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
             };
 
             self.reset = function () {
-                pmin = min || 0;
-                pmax = max || 2;
+                self.resetSpan();
                 pstep = pstep || 1;
                 self.empty();
+            };
+
+            self.resetSpan = function () {
+                pmin = min;
+                pmax = max;
             };
 
             self.getData = function () {

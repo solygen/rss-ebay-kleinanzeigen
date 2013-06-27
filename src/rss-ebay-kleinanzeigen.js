@@ -1,8 +1,9 @@
 require(['de.solygen/rss-ebay-kleinanzeigen/config',
          'de.solygen/rss-ebay-kleinanzeigen/factories/crawler',
          'de.solygen/rss-ebay-kleinanzeigen/factories/view',
-         'de.solygen/rss-ebay-kleinanzeigen/navigation'
-         ], function (config, crawlerFactory, viewFactory, navigation) {
+         'de.solygen/rss-ebay-kleinanzeigen/navigation',
+         'de.solygen/rss-ebay-kleinanzeigen/cache'
+         ], function (config, crawlerFactory, viewFactory, navigation, cache) {
 
     'use strict';
 
@@ -18,7 +19,19 @@ require(['de.solygen/rss-ebay-kleinanzeigen/config',
         };
 
     //register navigation
-    window.onhashchange = navigation(crawler, view);
+    $(function(){
+
+      // Bind the event.
+      $(window).on('hashchange', function() {
+        // Alerts every time the hash changes!
+        navigation(crawler, view);
+        //alert( location.hash);
+      });
+
+      // Trigger the event (useful on page load).
+      $(window).trigger('hashchange');
+
+    });
 
     window.onload = function() {
         //initial

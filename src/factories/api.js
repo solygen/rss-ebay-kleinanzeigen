@@ -57,7 +57,7 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/api',
 
             init = function (url, min, max) {
                 initApi();
-                initFeed(url || app.config.url, min, max);
+                initFeed(url, min, max);
 
                 //get property
                 self.getUrl = function() {

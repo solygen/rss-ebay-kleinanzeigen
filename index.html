@@ -39,20 +39,18 @@
                         <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
                         <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span></span></a></li>
                         <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span></span></a></li>
+                        <li><a href="#url=set"><i class="icon-cog"></i> Save URLs</a></li>
                     </ul>
-                    <!-- collapseble -->
-                    <div class="nav-collapse collapse">
-                         <form class="navbar-form pull-right">
-                            <input class="span5" type="text" id="url" placeholder="url">
-                            <div class="btn btn-small" style="margin: 3px"><a href="#url=set"><i class="icon-cog icon-large"></i></a></div>
-                        </form>
-                    </div>
-
                 </div>
             </div>
         </div>
 
-        <div id='content'><!-- content is rendered here --></div>
+
+        <div id='content'>
+            <div id='tags'><!-- content is rendered here --></div>
+            <div id='settings'><!-- content is rendered here --></div>
+            <div id='items'><!-- content is rendered here --></div>
+        </div>
 
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript" src="lib/vendors/jquery.min.js"></script>
