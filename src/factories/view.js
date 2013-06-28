@@ -3,6 +3,13 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
 
     'use strict';
 
+    var nodes = {
+        content: $(document.body).find('#content'),
+        tags: $(document.body).find('#content').find('#tags'),
+        settings: $(document.body).find('#content').find('#settings'),
+        items: $(document.body).find('#content').find('#items')
+    };
+
 
     var templates = {
 
@@ -14,8 +21,9 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
              return $('<div class="btn btn-small btn-info" style="margin: 3px" data-action="toggle">' + item + '</div>');
         },
 
-        getSettings: function () {
-             return $('<textarea cols="80" rows="8" id="urls" class="span12">');
+        getSettings: function (value) {
+             return $('<textarea cols="80" rows="8" id="urls" class="span12">')
+                    .val(value);
         },
 
         getItem: function () {
@@ -25,64 +33,17 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
         getItemRemove: function (id) {
             return $('<i class="icon-remove icon-large" data-action="delete" style="position:relative; bottom:0;right:right:0; z-index:2" id="' +  id + '"></i>');
         }
-
-    }
-
+    };
 
 
-    return function (crawler) {
 
-        var self = {}, list = [], filtered = {}, counter = 0, counts, node, list = [],
-                content = $(document.body).find('#content');
+    var items = function () {
 
-        var updateToolbar = function () {
-            counts = _.groupBy(list, function(item) {
-                return item.hidden;
-            });
-            counts = $.extend({false: [], true: []}, counts);
-            $(document.body).find('#displayed').removeClass('hidden').find('span').text(counts.false.length + ' of ' + (counts.true.length + counts.false.length));
-        }
+        var list = [],
+            filtered = {},
+            crawler;
 
-        var sort = function() {
-            list = _.sortBy(list, function(item) {
-                return item.id * (-1)
-            });
-        }
-        var insertFilterBlock = function () {
-            var $filter = templates.getFilter()
-            //output filtercount
-            filtered = _.map(filtered, function (item, key) {
-                return key + ': ' + item;
-            });
-            filtered = _.sortBy(filtered, function (line) {
-                return (-1) * line.split(':')[1];
-            });
-            filtered = _.map(filtered, function (item) {
-                var node = templates.getFilterNode(item);
-                node.click(function (e) {
-                    var label = $(this).data('class');
-                    $(document.body).find('.' + label)
-                        .toggle();
-                    $(this).toggleClass('active');
-                })
-                node.data('class', item.split(':')[0]);
-                if (item.split(':')[0] === 'default')
-                    node.addClass('active');
-                return node;
-            });
-            content.find('#tags').append($filter);
-            $filter.find('span').append(filtered);
-
-        }
-
-
-        var insertSettings = function () {
-            var con = templates.getSettings().val(config.getUrl().join('\n'));
-            content.find('#settings').append(con);
-        }
-
-
-        var getList = function (data) {
+        var normalise = function (data) {
             //update hidden/blacklist flag
             _.each(data, function (item) {
                 item.hidden = crawler.isIgnored(item.id) || false;
@@ -105,21 +66,28 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
                 }
                 list.push(item);
             });
-            return list;
-        }
+        };
 
-        var draw = function (list) {
-            var $collector = $('<div>').on('click', function (e) {
-                var id = $(e.target).attr('id');
-                crawler.ignore(id);
-                $(this).find('#' + id).hide().data('class', 'ignored');
-                e.stopPropagation();
+        var sort = function () {
+            list = _.sortBy(list, function (item) {
+                return item.id * (-1)
             });
+        };
+
+        var draw = function () {
+            var $container = $('<div>').on('click', function (e) {
+                    var id = $(e.target).attr('id');
+                    e.stopPropagation();
+                    crawler.ignore(id);
+                    $(this).find('#' + id)
+                            .hide()
+                            .data('class', 'ignored');
+                });
+
             _.each(list, function (item) {
-                    counter++;
                     var node = templates.getItem()
-                                .addClass(item.class)
-                                .attr('id', item.id);
+                               .addClass(item.class)
+                               .attr('id', item.id);
 
                     node.find('a')
                         .attr('href', item.link);
@@ -134,33 +102,101 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
                         .append(item.text)
                         .append('<br>')
                         .append(item.city);
-                    $collector.append(node);
+                    $container.append(node);
                 //hidem items
                 if (item.hidden) {
                     node.hide()
                         .css('backgroundColor', '#2f96b4');
                 }
             });
-            content.find('#items').append($collector)
+            nodes.items.append($container);
         }
 
+        return {
 
-        self.displayfeed = function (data) {
-            self = {}; list = []; filtered = {}; counter = 0; counts; node; list = [];
-            //clear
-            content.find('#tags').empty();
-            content.find('#settings').empty();
-            content.find('#items').empty();
+            get: function () {
+                return list;
+            },
 
-            //process
-            list = getList(data);
-            insertFilterBlock();
-            insertSettings();
-            updateToolbar();
-            sort();
-            draw(list);
-        };
+            getFiltered: function () {
+                return filtered;
+            },
 
-        return self;
+            set:function (data, cra) {
+                crawler = cra;
+                normalise(data);
+                sort();
+                draw();
+            }
+        }
+    };
+
+    return function (crawler) {
+
+        var drawToolbar = function (items) {
+                var counts = _.groupBy(items.get(), function(item) {
+                    return item.hidden;
+                });
+                counts = $.extend({false: [], true: []}, counts);
+                $(document.body).find('#displayed')
+                                .removeClass('hidden')
+                                .find('span')
+                                .text(counts.false.length + ' of ' + (counts.true.length + counts.false.length));
+            },
+
+            drawFilter = function (items) {
+                var $filter = templates.getFilter(),
+                    filtered = items.getFiltered();
+                //output filtercount
+                filtered = _.map(filtered, function (item, key) {
+                    return key + ': ' + item;
+                });
+                filtered = _.sortBy(filtered, function (line) {
+                    return (-1) * line.split(':')[1];
+                });
+                filtered = _.map(filtered, function (item) {
+                    var node = templates.getFilterNode(item);
+                    node.click(function (e) {
+                        var label = $(this).data('class');
+                        $(document.body).find('.' + label)
+                            .toggle();
+                        $(this).toggleClass('active');
+                    })
+                    node.data('class', item.split(':')[0]);
+                    if (item.split(':')[0] === 'default')
+                        node.addClass('active');
+                    return node;
+                });
+                $filter.find('span').append(filtered);
+                nodes.tags.append($filter);
+            },
+
+            drawSettings = function () {
+                var value = config.getUrl().join('\n');
+                templates.getSettings(value)
+                         .appendTo(nodes.settings);
+            },
+
+
+            drawItems = function (it, data) {
+                it.set(data, crawler)
+            }
+
+        return {
+            displayfeed: function (data) {
+                var it = items();
+
+                //clear
+                nodes.tags.empty();
+                nodes.settings.empty();
+                nodes.items.empty();
+
+                //process (ordered)
+                drawItems(it, data);
+                drawFilter(it);
+                drawToolbar(it);
+                drawSettings();
+            }
+        }
     }
 });
