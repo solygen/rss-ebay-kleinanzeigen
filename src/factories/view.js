@@ -35,7 +35,8 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
         }
     };
 
-
+//TODO: http://tympanus.net/codrops/2013/07/02/loading-effects-for-grid-items-with-css-animations/?utm_source=html5weekly&utm_medium=email
+//TODO: http://fabien-d.github.io/alertify.js/?utm_source=html5weekly&utm_medium=email
 
     var items = function () {
 
@@ -142,6 +143,7 @@ define('de.solygen/rss-ebay-kleinanzeigen/factories/view',
                                 .removeClass('hidden')
                                 .find('span')
                                 .text(counts.false.length + ' of ' + (counts.true.length + counts.false.length));
+                window.document.title = '(' + counts.false.length + ') rss-ebay-kleinanzeigen'
             },
 
             drawFilter = function (items) {
