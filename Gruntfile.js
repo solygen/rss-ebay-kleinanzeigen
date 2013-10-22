@@ -29,6 +29,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    //TODO
+    //grunt.loadNpmTasks('grunt-ftp-deploy');
 
     //after installing latest shit with bower run this task to copy relevant files to lib
     grunt.registerTask('build:libs', ['copy:update'/*, 'clean'*/]);

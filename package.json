@@ -15,6 +15,7 @@
         "grunt-contrib-htmlmin": "~0.1",
         "grunt-contrib-watch": "~0.4",
         "grunt-docco":"~0.2",
-        "grunt-docco2": "~0.1"
+        "grunt-docco2": "~0.1",
+        "grunt-ftp-deploy": "~0.0"
     }
 }
