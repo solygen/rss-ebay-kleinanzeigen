@@ -3,7 +3,7 @@ module.exports = {
         banner: '/* <%= pkg.name %>.<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>) <%= pkg.repository.url %> */'
     },
     dist: {
-        src: ['<%= concat.js.dest %>'],
-        dest: '<%= concat.js.dest %>'
+        src: ['lib/<%= pkg.name %>.min.js'],
+        dest: 'builds/<%= pkg.name %>.<%= pkg.version %>.min.js'
     }
 };

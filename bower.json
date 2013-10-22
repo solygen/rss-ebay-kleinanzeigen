@@ -7,10 +7,10 @@
         "components"
     ],
     "dependencies": {
-            "jquery": "~1.9",
-            "bootstrap": "~2.3",
-            "font-awesome": "~3.1",
-            "underscore": "~1.4",
+            "jquery": "~2.0",
+            "bootstrap": "~3.0",
+            "font-awesome": "~3.2",
+            "underscore": "~1.5",
             "requirejs": "~2.1"
         }
 }

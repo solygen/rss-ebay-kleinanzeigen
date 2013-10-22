@@ -15,51 +15,56 @@ module.exports = {
     },
     update: {
         files: [
+                //jQuery
                 {
                 expand: true,
-                cwd: 'vendors/jquery/',
+                cwd: 'components/jquery/',
                 src: ['jquery.min.js'],
                 dest: 'lib/vendors/'
                 },
+                //font-awesome
                 {
                 expand: true,
-                cwd: 'vendors/font-awesome/build/assets/font-awesome/css/',
+                cwd: 'components/font-awesome/css/',
                 src: ['font-awesome.min.css'],
                 dest: 'lib/vendors/'
                 },
                 {
                 expand: true,
-                cwd: 'vendors/font-awesome/build/assets/font-awesome/font/',
+                cwd: 'components/font-awesome/font/',
                 src: ['fontawesome-webfont.woff'],
                 dest: 'lib/font/'
                 },
+                //bootstrap
                 {
                 expand: true,
-                cwd: 'vendors/bootstrap/docs/assets/js/',
+                cwd: 'components/bootstrap/dist/js/',
                 src: ['bootstrap.min.js'],
                 dest: 'lib/vendors/'
                 },
                 {
                 expand: true,
-                cwd: 'vendors/bootstrap/docs/assets/css/',
-                src: ['bootstrap-responsive.css'],
-                dest: 'lib/vendors/'
-                },
-                {
-                expand: true,
-                cwd: 'vendors/bootstrap/docs/assets/css/',
+                cwd: 'components/bootstrap/dist/css/',
                 src: ['bootstrap.css'],
                 dest: 'lib/vendors/'
                 },
                 {
                 expand: true,
-                cwd: 'vendors/underscore/',
+                cwd: 'components/bootstrap/dist/css/',
+                src: ['bootstrap-theme.css'],
+                dest: 'lib/vendors/'
+                },
+                //underscore
+                {
+                expand: true,
+                cwd: 'components/underscore/',
                 src: ['underscore-min.js'],
                 dest: 'lib/vendors/'
                 },
+                //require.js
                 {
                 expand: true,
-                cwd: 'vendors/requirejs/',
+                cwd: 'components/requirejs/',
                 src: ['require.js'],
                 dest: 'lib/vendors/'
                 }

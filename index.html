@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="lib/vendors/bootstrap.css">
-        <link rel="stylesheet" href="lib/vendors/bootstrap-responsive.css">
+        <link rel="stylesheet" href="lib/vendors/bootstrap-theme.css">
         <link rel="stylesheet" href="lib/vendors/font-awesome.min.css">
         <link rel="stylesheet" href="src/rss-ebay-kleinanzeigen.css">
 
@@ -24,25 +24,25 @@
     <body>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- show collapsed content -->
-                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- main -->
-                    <a class="brand" href="#"><i class="icon-shopping-cart"></i> ebay Kleinanzeigen</a>
-                    <ul class="nav">
-                        <li><a href="#data=refresh"><i class="icon-refresh"></i> Refresh</a></li>
-                        <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
-                        <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span></span></a></li>
-                        <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span></span></a></li>
-                        <li><a href="#url=set"><i class="icon-cog"></i> Save URLs</a></li>
-                    </ul>
-                </div>
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand active" href="#home"><i class="icon-shopping-cart"></i> ebay Kleinanzeigen</a>
             </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="#data=refresh"><i class="icon-refresh"></i> Refresh</a></li>
+                <li><a href="#data=clear"><i class="icon-trash"></i> Reset</a></li>
+                <li><a href="#" class="hidden" id="displayed"><i class="icon-ok icon-large"></i> <span></span></a></li>
+                <li><a href="#" class="hidden" id="hidden"><i class="icon-remove icon-large"></i> <span></span></a></li>
+                <li><a href="#url=set"><i class="icon-cog"></i> Save URLs</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
         </div>
 
 
